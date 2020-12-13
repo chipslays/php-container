@@ -1,0 +1,18 @@
+{
+    "name": "aethletic/php-container",
+    "description": "Simple Dependency Injection Container.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "aethletic",
+            "email": "hello@botify.ru"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Container\\": "src/"
+        }
+    }
+}
