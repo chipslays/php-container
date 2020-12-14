@@ -27,13 +27,17 @@ Container::has('age'); // false
 
 Container::remove('name'); // remove data for `name` key
 Container::clear(); // clear all save data, except mapped methods
+```
 
+```php
 // map your own methods
 $app = Container::getInstance();
 $app->map('sum', fn(...$args) => array_sum($args));
 echo $app->sum(1000, 300, 30, 5, 2) . PHP_EOL; // 1337
 echo $app->sum(1000, 900, 90, 7) . PHP_EOL; // 1997
+```
 
+```php
 // to execute the function once
 $app = Container::getInstance();
 $app::mapOnce('timestamp', fn() => time());
