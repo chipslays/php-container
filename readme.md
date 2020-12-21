@@ -34,7 +34,7 @@ Container::clear(); // clear all save data, except mapped methods
 $app = Container::getInstance();
 $app->map('sum', fn(...$args) => array_sum($args));
 echo $app->sum(1000, 300, 30, 5, 2) . PHP_EOL; // 1337
-echo $app->sum(1000, 900, 90, 7) . PHP_EOL; // 1997
+echo Container::sum(1000, 900, 90, 7) . PHP_EOL; // 1997
 ```
 
 ```php
