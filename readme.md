@@ -45,3 +45,62 @@ echo Container::timestamp() . PHP_EOL; // 1607881889
 sleep(3);
 echo $app->timestamp() . PHP_EOL; // 1607881889
 ```
+
+### Use cases
+
+```php
+use Container\Container as App;
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+$app = App::getInstance();
+
+$app->mapOnce('db', function () use ($app) {
+    $capsule = new Capsule;
+    $capsule->addConnection(require __DIR__ . '/config/database.php');
+    $capsule->setAsGlobal();
+    $capsule->bootEloquent();
+});
+
+// use
+$app->db()->table(...)->insert(...);
+```
+
+```php
+use Container\Container as App;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\ChromePHPHandler;
+
+$app = App::getInstance();
+
+$app->mapOnce('logger', function () {
+    $logConfig = require __DIR__ . '/config/log.php';
+    $logger = new Logger('app');
+    $logger->pushHandler(new StreamHandler($logConfig['log_dir'], Logger::DEBUG));
+    $logger->pushHandler(new ChromePHPHandler);
+    return $logger;
+});
+
+$app->logger()->error(...);
+```
+
+```php
+$app->mapOnce('router', fn () => new Router([
+    'base_folder' => __DIR__,
+    'main_method ' => 'index',
+    'paths' => [
+        'controllers' => '/app/Controllers',
+        'middlewares' => '/app/Middlewares',
+    ],
+    'namespaces' => [
+        'controllers' => '\App\Controllers',
+        'middlewares' => '\App\Middlewares',
+    ]
+]));
+
+$app->map('run', fn () => $app->router()->run());
+
+// use
+$app->router()->get('/', fn() => ...);
+$app->run();
+```
