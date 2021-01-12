@@ -1,5 +1,5 @@
 {
-    "name": "aethletic/php-container",
+    "name": "chipslays/php-container",
     "description": "Simple Dependency Injection Container.",
     "type": "library",
     "license": "MIT",
