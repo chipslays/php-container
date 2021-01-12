@@ -4,7 +4,7 @@ Simple Dependency Injection Container.
 
 ## Installation
 ```bash
-composer require aethletic/php-container
+composer require chipslays/php-container
 ```
 
 ## Example
@@ -13,11 +13,11 @@ use Container\Container;
 
 require 'vendor/autoload.php';
 
-Container::set('name', 'Aethletic');
-echo Container::get('name') . PHP_EOL; // Aethletic
+Container::set('name', 'chipslays');
+echo Container::get('name') . PHP_EOL; // chipslays
 
 $app = Container::getInstance();
-echo $app->name . PHP_EOL; // Aethletic
+echo $app->name . PHP_EOL; // chipslays
 // Container::$name; // Uncaught Error: Access to undeclared static property
 
 echo Container::get('age', 'default age is: 17') . PHP_EOL; // default age is: 17
